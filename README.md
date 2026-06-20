@@ -35,7 +35,7 @@ model) and is being grown into a proper, deployable React app.
 
 | Concern        | Choice                                              |
 | -------------- | --------------------------------------------------- |
-| UI             | React 18 (function components + hooks)              |
+| UI             | React 19 (function components + hooks)              |
 | Build / dev    | Vite                                                |
 | Styling        | Tailwind CSS (layout) + inline theme tokens (color) |
 | Icons          | `lucide-react`                                      |
@@ -43,7 +43,7 @@ model) and is being grown into a proper, deployable React app.
 | Lint           | ESLint                                              |
 | Tests          | Vitest + React Testing Library                      |
 | Runtime mgmt   | [mise](https://mise.jdx.dev/) (pins Node)           |
-| Hosting        | GitHub Pages (static)                               |
+| Hosting        | Netlify (static; Vercel-compatible)                 |
 
 > Setup note: this repo targets a WSL + mise environment. Machine-specific details live in
 > `CLAUDE.local.md` (gitignored). See [CLAUDE.md](./CLAUDE.md) for contributor/agent guidance.
@@ -123,9 +123,10 @@ built-in schematic drawing — reuse any existing key for new exercises.
 
 ## Deployment
 
-The app is a fully static SPA (no server, no client-side router) and deploys to **GitHub
-Pages** via GitHub Actions. The Vite `base` is set to the repository path for project-site
-hosting. See [CLAUDE.md](./CLAUDE.md#deployment) for details.
+The app is a fully static SPA (no server, no client-side router) and deploys to **Netlify**
+(Vercel works identically). Build command `npm run build`, publish directory `dist/`, and
+Vite's `base` stays `/` since it's served from the site root. See
+[CLAUDE.md](./CLAUDE.md#deployment) for details.
 
 ## License
 

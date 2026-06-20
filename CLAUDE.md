@@ -85,12 +85,12 @@ React; user data is persisted to the browser via the storage adapter in `src/lib
 
 ## Deployment
 
-- Target: **GitHub Pages**, built by a GitHub Actions workflow (`.github/workflows/`).
-- Because it's hosted at a project-site sub-path, Vite's `base` must match the repo path
-  (e.g. `/decompress/`). If the repo is renamed or a custom domain is added, update `base`
-  in `vite.config.js`.
-- The app is a single static page with no client router, so no `404.html` fallback hack is
-  needed.
+- Target: **Netlify** (Vercel is a drop-in alternative). Build command `npm run build`,
+  publish directory `dist/`.
+- Served from the site root, so Vite's `base` stays `/` (no sub-path config).
+- The app is a single static page with no client router, so no SPA redirect/`404.html`
+  fallback is required. (If a router is ever added, add a catch-all redirect to
+  `index.html`.)
 
 ## Project status
 
