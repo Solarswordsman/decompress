@@ -85,8 +85,11 @@ React; user data is persisted to the browser via the storage adapter in `src/lib
 
 ## Deployment
 
-- Target: **Netlify** (Vercel is a drop-in alternative). Build command `npm run build`,
-  publish directory `dist/`.
+- Target: **Netlify** (Vercel is a drop-in alternative), git-connected for
+  auto-deploy on push to `main` + deploy previews on PRs.
+- Build config lives in [`netlify.toml`](./netlify.toml): the build command gates on
+  `npm run lint && npm test` before `npm run build`; publish dir is `dist/`;
+  `NODE_VERSION` is pinned there.
 - Served from the site root, so Vite's `base` stays `/` (no sub-path config).
 - The app is a single static page with no client router, so no SPA redirect/`404.html`
   fallback is required. (If a router is ever added, add a catch-all redirect to

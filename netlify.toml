@@ -1,0 +1,22 @@
+# Netlify build & deploy settings for Decompress (a static Vite SPA).
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+	# Gate the deploy on lint + tests (mirrors the repo's "lint & test before
+	# build" workflow), then produce the production bundle. If you'd rather have
+	# faster deploys, change this to just "npm run build".
+	command = "npm run lint && npm test && npm run build"
+	publish = "dist"
+
+[build.environment]
+	# Vite 8 needs Node >= 20.19 / 22.12. Pin an explicit version for reproducible
+	# CI builds (Netlify's default image Node may be older). Bump to "24" to match
+	# the local mise pin if you prefer parity.
+	NODE_VERSION = "22"
+
+# No client-side router, so no SPA fallback redirect is needed. If one is added
+# later, register a catch-all here, e.g.:
+#   [[redirects]]
+#     from = "/*"
+#     to = "/index.html"
+#     status = 200

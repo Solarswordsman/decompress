@@ -124,9 +124,9 @@ built-in schematic drawing — reuse any existing key for new exercises.
 ## Deployment
 
 The app is a fully static SPA (no server, no client-side router) and deploys to **Netlify**
-(Vercel works identically). Build command `npm run build`, publish directory `dist/`, and
-Vite's `base` stays `/` since it's served from the site root. See
-[CLAUDE.md](./CLAUDE.md#deployment) for details.
+(Vercel works identically) via git-connected continuous deployment. Build settings live in
+[`netlify.toml`](./netlify.toml); the publish directory is `dist/` and Vite's `base` stays
+`/` since it's served from the site root. See [CLAUDE.md](./CLAUDE.md#deployment) for details.
 
 ## License
 
