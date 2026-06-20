@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/*
+ * Decompress paints its own surfaces via theme tokens (see src/theme),
+ * so the global stylesheet stays intentionally minimal.
+ */
+html,
+body,
+#root {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+}
