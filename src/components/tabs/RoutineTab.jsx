@@ -1,7 +1,9 @@
 import { Trash2, ChevronUp, ChevronDown } from "lucide-react";
 import ExerciseCard from "../ExerciseCard.jsx";
+import { useTheme } from "../../theme/ThemeContext.jsx";
 
-export default function RoutineTab({ routine, setRoutine, byId, moveRoutine, toggleRoutine, toggleExpand, expandedIds, level, mode, T }) {
+export default function RoutineTab({ routine, setRoutine, byId, moveRoutine, toggleRoutine, toggleExpand, expandedIds, level }) {
+	const { T } = useTheme();
 	return (
 		<>
 			{routine.length === 0 ? (
@@ -45,8 +47,6 @@ export default function RoutineTab({ routine, setRoutine, byId, moveRoutine, tog
 										inRoutine={true}
 										onToggleRoutine={() => toggleRoutine(ex.id)}
 										onToggleExpand={() => toggleExpand(ex.id)}
-										T={T}
-										mode={mode}
 									/>
 								</div>
 							</div>

@@ -1,4 +1,7 @@
-export default function DetailLevelControl({ level, setLevel, setExpandedIds, LEVELS, tab, search, setSearch, T }) {
+import { useTheme } from "../theme/ThemeContext.jsx";
+
+export default function DetailLevelControl({ level, setLevel, setExpandedIds, LEVELS, tab, search, setSearch }) {
+	const { T } = useTheme();
 	return (
 		<div className="flex items-center gap-2 flex-wrap" style={{ marginBottom: 12 }}>
 			<span style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: T.faint }}>Detail</span>

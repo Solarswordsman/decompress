@@ -1,4 +1,7 @@
-export default function Tabs({ tab, setTab, routine, T }) {
+import { useTheme } from "../theme/ThemeContext.jsx";
+
+export default function Tabs({ tab, setTab, routine }) {
+	const { T } = useTheme();
 	return (
 		<div className="flex gap-1 rounded-xl" style={{ background: T.strip, padding: 4, marginBottom: 14 }}>
 			{[

@@ -1,8 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
-import { THEMES } from "./theme/themes.js";
-import { catOf } from "./data/categories.js";
 import DEFAULT_EXERCISES from "./data/exercises.json";
-import { KEY_DATA, KEY_ROUTINE, KEY_THEME, loadStored, saveStored, deleteStored } from "./lib/storage.js";
+import { KEY_DATA, KEY_ROUTINE, loadStored, saveStored, deleteStored } from "./lib/storage.js";
+import { useTheme } from "./theme/ThemeContext.jsx";
 import ExerciseCard from "./components/ExerciseCard.jsx";
 import Header from "./components/Header.jsx";
 import Tabs from "./components/Tabs.jsx";
@@ -23,11 +22,10 @@ export default function DecompressApp() {
 	const [jsonMsg, setJsonMsg] = useState(null); // {ok, text}
 	const [usingCustom, setUsingCustom] = useState(false);
 	const [loaded, setLoaded] = useState(false);
-	const [mode, setMode] = useState("light"); // light | dark
 
-	const T = THEMES[mode];
+	const { T } = useTheme();
 
-	// Load persisted data on mount
+	// Load persisted data on mount (theme is handled by ThemeProvider).
 	useEffect(() => {
 		(async () => {
 			const storedEx = await loadStored(KEY_DATA);
@@ -37,8 +35,6 @@ export default function DecompressApp() {
 			}
 			const storedRoutine = await loadStored(KEY_ROUTINE);
 			if (Array.isArray(storedRoutine)) setRoutine(storedRoutine);
-			const storedTheme = await loadStored(KEY_THEME);
-			if (storedTheme === "dark" || storedTheme === "light") setMode(storedTheme);
 			setLoaded(true);
 		})();
 	}, []);
@@ -56,12 +52,6 @@ export default function DecompressApp() {
 		setSyncedExercises(exercises);
 		setJsonDraft(JSON.stringify(exercises, null, 2));
 	}
-
-	const toggleMode = () => {
-		const next = mode === "light" ? "dark" : "light";
-		setMode(next);
-		saveStored(KEY_THEME, next);
-	};
 
 	const byId = useMemo(() => Object.fromEntries(exercises.map((e) => [e.id, e])), [exercises]);
 
@@ -143,8 +133,6 @@ export default function DecompressApp() {
 				inRoutine={routine.includes(ex.id)}
 				onToggleRoutine={() => toggleRoutine(ex.id)}
 				onToggleExpand={() => toggleExpand(ex.id)}
-				T={T}
-				mode={mode}
 			/>
 		);
 		// Expanded cards in compact grids should span the full row
@@ -156,14 +144,12 @@ export default function DecompressApp() {
 		return card;
 	};
 
-	const accent = catOf("neck", mode).color;
-
 	return (
 		<div style={{ minHeight: "100vh", background: T.paper, fontFamily: "system-ui, -apple-system, 'Segoe UI', sans-serif", color: T.text, transition: "background 0.25s ease, color 0.25s ease" }}>
 			<div className="mx-auto" style={{ maxWidth: 880, padding: "20px 16px 64px" }}>
-				<Header accent={accent} mode={mode} toggleMode={toggleMode} T={T} />
+				<Header />
 
-				<Tabs tab={tab} setTab={setTab} routine={routine} T={T} />
+				<Tabs tab={tab} setTab={setTab} routine={routine} />
 
 				{tab !== "data" && (
 					<DetailLevelControl
@@ -174,7 +160,6 @@ export default function DecompressApp() {
 						tab={tab}
 						search={search}
 						setSearch={setSearch}
-						T={T}
 					/>
 				)}
 
@@ -186,8 +171,6 @@ export default function DecompressApp() {
 						visible={visible}
 						gridClass={gridClass}
 						renderCard={renderCard}
-						mode={mode}
-						T={T}
 					/>
 				)}
 
@@ -201,8 +184,6 @@ export default function DecompressApp() {
 						toggleExpand={toggleExpand}
 						expandedIds={expandedIds}
 						level={level}
-						mode={mode}
-						T={T}
 					/>
 				)}
 
@@ -216,8 +197,6 @@ export default function DecompressApp() {
 						resetDefaults={resetDefaults}
 						usingCustom={usingCustom}
 						exercises={exercises}
-						accent={accent}
-						T={T}
 					/>
 				)}
 			</div>

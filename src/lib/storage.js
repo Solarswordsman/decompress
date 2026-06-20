@@ -28,6 +28,13 @@ function backend() {
 }
 
 export async function loadStored(key) {
+	return loadStoredSync(key);
+}
+
+// Synchronous read — for values needed during the first render (e.g. the theme,
+// so there's no flash of the wrong color scheme). localStorage is itself
+// synchronous; the async variant above just mirrors the original storage API.
+export function loadStoredSync(key) {
 	const store = backend();
 	try {
 		const raw = store ? store.getItem(key) : memory.get(key);

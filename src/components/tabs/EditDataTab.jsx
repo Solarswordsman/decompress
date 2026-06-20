@@ -1,6 +1,8 @@
 import { Save, RotateCcw, Check, X } from "lucide-react";
+import { useTheme } from "../../theme/ThemeContext.jsx";
 
-export default function EditDataTab({ jsonDraft, setJsonDraft, jsonMsg, setJsonMsg, saveJson, resetDefaults, usingCustom, exercises, accent, T }) {
+export default function EditDataTab({ jsonDraft, setJsonDraft, jsonMsg, setJsonMsg, saveJson, resetDefaults, usingCustom, exercises }) {
+	const { T, accent } = useTheme();
 	return (
 		<div className="flex flex-col gap-3">
 			<div className="rounded-2xl" style={{ background: T.card, border: `1px solid ${T.border}`, padding: 16 }}>

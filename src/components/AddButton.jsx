@@ -1,6 +1,8 @@
 import { Plus, Check } from "lucide-react";
+import { useTheme } from "../theme/ThemeContext.jsx";
 
-export default function AddButton({ inRoutine, onClick, compact, T }) {
+export default function AddButton({ inRoutine, onClick, compact }) {
+	const { T } = useTheme();
 	return (
 		<button
 			onClick={onClick}
