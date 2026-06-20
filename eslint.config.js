@@ -32,9 +32,6 @@ export default [
 			// House style: tabs for indentation (see .editorconfig).
 			"@stylistic/indent": ["error", "tab"],
 			"no-unused-vars": ["error", { varsIgnorePattern: "^_" }],
-			// Intentional sync of the JSON-editor draft to the exercise data.
-			// Revisit when EditDataTab is extracted (Part 2).
-			"react-hooks/set-state-in-effect": "warn",
 		},
 	},
 	{
