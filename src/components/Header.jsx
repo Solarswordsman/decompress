@@ -1,6 +1,8 @@
 import { AlertTriangle, Sun, Moon } from "lucide-react";
+import { useTheme } from "../theme/ThemeContext.jsx";
 
-export default function Header({ accent, mode, toggleMode, T }) {
+export default function Header() {
+	const { T, mode, accent, toggleMode } = useTheme();
 	return (
 		<header style={{ marginBottom: 14 }}>
 			<div className="flex items-end gap-3 flex-wrap">

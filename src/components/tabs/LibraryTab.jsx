@@ -1,6 +1,8 @@
 import { CATS, catOf } from "../../data/categories.js";
+import { useTheme } from "../../theme/ThemeContext.jsx";
 
-export default function LibraryTab({ exercises, filter, setFilter, visible, gridClass, renderCard, mode, T }) {
+export default function LibraryTab({ exercises, filter, setFilter, visible, gridClass, renderCard }) {
+	const { T, mode } = useTheme();
 	return (
 		<>
 			<div className="flex gap-1.5 flex-wrap" style={{ marginBottom: 14 }}>

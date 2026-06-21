@@ -3,8 +3,10 @@ import { catOf } from "../data/categories.js";
 import Figure from "./Figure.jsx";
 import CatChip from "./CatChip.jsx";
 import AddButton from "./AddButton.jsx";
+import { useTheme } from "../theme/ThemeContext.jsx";
 
-export default function ExerciseCard({ ex, level, inRoutine, onToggleRoutine, expanded, onToggleExpand, T, mode }) {
+export default function ExerciseCard({ ex, level, inRoutine, onToggleRoutine, expanded, onToggleExpand }) {
+	const { T, mode } = useTheme();
 	const cat = catOf(ex.category, mode);
 
 	if (level === "names" && !expanded) {
@@ -29,11 +31,11 @@ export default function ExerciseCard({ ex, level, inRoutine, onToggleRoutine, ex
 				<div className="min-w-0 flex-1">
 					<div className="flex items-center gap-2 flex-wrap">
 						<span className="font-semibold" style={{ fontSize: 14, color: T.text }}>{ex.name}</span>
-						<CatChip cat={ex.category} small mode={mode} />
+						<CatChip cat={ex.category} small />
 					</div>
 					<div style={{ fontSize: 12.5, color: T.sub, marginTop: 2 }}>{ex.oneLiner}</div>
 				</div>
-				<AddButton inRoutine={inRoutine} onClick={onToggleRoutine} compact T={T} />
+				<AddButton inRoutine={inRoutine} onClick={onToggleRoutine} compact />
 			</div>
 		);
 	}
@@ -48,12 +50,12 @@ export default function ExerciseCard({ ex, level, inRoutine, onToggleRoutine, ex
 				<div className="min-w-0 flex-1">
 					<div className="flex items-start gap-2 flex-wrap">
 						<span className="font-semibold" style={{ fontSize: 15, color: T.text }}>{ex.name}</span>
-						<CatChip cat={ex.category} small mode={mode} />
+						<CatChip cat={ex.category} small />
 					</div>
 					<p style={{ fontSize: 13, color: T.body, margin: "4px 0 6px", lineHeight: 1.45 }}>{ex.brief}</p>
 					<div className="flex items-center gap-3 flex-wrap">
 						<span style={{ fontSize: 12, color: cat.color, fontWeight: 600 }}>{ex.dose}</span>
-						<AddButton inRoutine={inRoutine} onClick={onToggleRoutine} compact T={T} />
+						<AddButton inRoutine={inRoutine} onClick={onToggleRoutine} compact />
 					</div>
 				</div>
 			</div>
@@ -74,7 +76,7 @@ export default function ExerciseCard({ ex, level, inRoutine, onToggleRoutine, ex
 				<div className="min-w-0 flex-1">
 					<div className="flex items-center gap-2 flex-wrap">
 						<h3 className="font-bold" style={{ fontSize: 18, color: T.text, margin: 0 }}>{ex.name}</h3>
-						<CatChip cat={ex.category} mode={mode} />
+						<CatChip cat={ex.category} />
 						{expanded && (
 							<button onClick={onToggleExpand} className="ml-auto" style={{ background: "none", border: "none", cursor: "pointer", color: T.faint }} title="Collapse">
 								<ChevronUp size={18} />
@@ -106,7 +108,7 @@ export default function ExerciseCard({ ex, level, inRoutine, onToggleRoutine, ex
 
 			<div className="flex items-center gap-3 flex-wrap" style={{ marginTop: 12 }}>
 				<span className="rounded-lg font-semibold" style={{ fontSize: 12.5, color: T.badgeText, background: cat.color, padding: "5px 10px" }}>{ex.dose}</span>
-				<AddButton inRoutine={inRoutine} onClick={onToggleRoutine} T={T} />
+				<AddButton inRoutine={inRoutine} onClick={onToggleRoutine} />
 			</div>
 
 			{ex.cautions && (

@@ -1,6 +1,8 @@
 import { catOf } from "../data/categories.js";
+import { useTheme } from "../theme/ThemeContext.jsx";
 
-export default function CatChip({ cat, small, mode }) {
+export default function CatChip({ cat, small }) {
+	const { mode } = useTheme();
 	const c = catOf(cat, mode);
 	return (
 		<span
